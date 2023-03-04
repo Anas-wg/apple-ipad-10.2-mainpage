@@ -51,7 +51,7 @@ searchShadowEl.addEventListener('click', hideSearch)
 function showSearch() {
   headerEl.classList.add('searching')
   // documentElement -> 문서의 최상단 요소 = html
-  document.documentElement.classList.add("fixed")
+  stopScroll()
   // reverse 메소드로 역순으로 처리
   headerMenuEls.reverse().forEach(function (el, index) {
     // index 숫자 * 0.4 / 배열 아이템의 개수
@@ -68,7 +68,7 @@ function showSearch() {
 
 function hideSearch() {
   headerEl.classList.remove('searching')
-  document.documentElement.classList.remove("fixed")
+  playScroll();
   headerMenuEls.reverse().forEach(function (el, index) {
     el.style.transitionDelay = index * .4 / headerMenuEls.length + 's'
   });
@@ -78,6 +78,26 @@ function hideSearch() {
   searchDelayEls.reverse()
   searchInputEl.value = ''
 }
+
+function playScroll(){
+  document.documentElement.classList.remove("fixed")
+}
+
+function stopScroll(){
+  document.documentElement.classList.add("fixed")
+}
+
+// header menu toggle
+const menuStaterEl = document.querySelector("header .menu-starter")
+menuStaterEl.addEventListener('click', function(){
+  if(headerEl.classList.contains("menuing")){
+    headerEl.classList.remove("menuing")
+    playScroll()
+  } else {
+    headerEl.classList.add("menuing");
+    stopScroll()
+  }
+})
 
 
 //요소의 가시성 관찰
