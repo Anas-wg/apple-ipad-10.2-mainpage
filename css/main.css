@@ -617,7 +617,7 @@ header.searching .search .autocompletes li {
     display: none;
   }  
   
-  header ul.menu> li.menu-starter span:last-child {
+  header ul.menu > li.menu-starter span:last-child {
     margin-bottom: 0;
   }
 
