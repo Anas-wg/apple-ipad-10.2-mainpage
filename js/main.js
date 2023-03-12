@@ -45,7 +45,10 @@ const searchInputEl = searchWrapEl.querySelector('input')
 const searchDelayEls = [...searchWrapEl.querySelectorAll('li')]
 
 searchStarterEl.addEventListener('click', showSearch)
-searchCloserEl.addEventListener('click',hideSearch)
+searchCloserEl.addEventListener('click',function(event){
+  event.stopPropagation();
+  hideSearch();
+})
 searchShadowEl.addEventListener('click', hideSearch)
 
 function showSearch() {
@@ -92,12 +95,62 @@ const menuStaterEl = document.querySelector("header .menu-starter")
 menuStaterEl.addEventListener('click', function(){
   if(headerEl.classList.contains("menuing")){
     headerEl.classList.remove("menuing")
+    searchInputEl.value = ''
     playScroll()
   } else {
     headerEl.classList.add("menuing");
     stopScroll()
   }
 })
+
+// 헤더 검색
+const searchTextFieldEl = document.querySelector('header .textfield')
+const searchCancelEl = document.querySelector('header .search-canceler')
+searchTextFieldEl.addEventListener('click', function(){
+  headerEl.classList.add('searching--mobile')
+})
+
+searchCancelEl.addEventListener('click', function(){
+  headerEl.classList.remove('searching--mobile')
+  searchInputEl.focus();
+})
+
+//Event Bubling 방지 
+window.addEventListener('resize',function(){
+  if(window.innerWidth <= 740) {
+    headerEl.classList.remove('searching')
+  } else {
+    headerEl.classList.remove('searching--mobile')
+  }
+})
+
+// nav toggle
+const navEl = document.querySelector('nav')
+const navMenuToggleEl = document.querySelector('.menu-toggler')
+const navMenuShadowEl = document.querySelector('.shadow')
+
+navMenuToggleEl.addEventListener('click',function(){
+  if(navEl.classList.contains('menuing')) {
+    hideNavMenu();
+  } else {
+    showNavMenu();
+  }
+})
+
+navEl.addEventListener('click',function(event) {
+  event.stopPropagation();
+})
+
+navMenuShadowEl.addEventListener('click',hideNavMenu);
+window.addEventListener('click',hideNavMenu);
+
+function showNavMenu() {
+  navEl.classList.add('menuing')
+}
+
+function hideNavMenu() {
+  navEl.classList.remove('menuing')
+}
 
 
 //요소의 가시성 관찰
