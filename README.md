@@ -97,6 +97,8 @@
 
 - 배포 방법
 <br>
+Vercel
+<br>
 ![MARKDOWN](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpyndK5rkmHRm35WG4kX6Y8DVtsvPZaTNy0Q&usqp=CAU)
 
 
